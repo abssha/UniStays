@@ -43,7 +43,7 @@ const Signin = ({ open, onClose, onLoginSuccess }) => {
           
           {/* Modal Header */}
           <div className="flex justify-between">
-            <img className="md:ml-59 ml-20 md:w-40 w-30 md:-mb-8 -mb-5" src="./img/US1.png" alt="logo" />
+            <img className="md:ml-59 ml-24 md:w-40 w-30 md:-mb-8 -mb-5" src="./img/US1.png" alt="logo" />
             <button
               onClick={onClose}
               className="m-2 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg w-8 h-8 flex justify-center items-center"
