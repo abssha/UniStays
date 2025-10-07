@@ -4,164 +4,147 @@ import Explore from "./Explore";
 import Signin from "@/explore/Signin";
 import { toast } from "sonner";
 
-const Nav = ({setLoading}) => {
+const Nav = ({ setLoading }) => {
+  const navigate = useNavigate();
 
-  const navigate=useNavigate()
-
-  const cities=[
+  const cities = [
     "https://asset-cdn.stanzaliving.com/stanza-living/image/upload/f_auto,q_auto/v1582114421/NewWebsite/cities/delhi.png",
     "https://asset-cdn.stanzaliving.com/stanza-living/image/upload/f_auto,q_auto/v1637904076/Website/CMS-Uploads/gadbjhmexjzadryrckds.png",
     "https://asset-cdn.stanzaliving.com/stanza-living/image/upload/f_auto,q_auto/v1582114421/NewWebsite/cities/pune.png",
-  ]
+  ];
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [openDialogue, setOpenDialogue] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false); // Mobile menu toggle
+  const [exploreOpen, setExploreOpen] = useState(false); // Explore dropdown
+  const [openDialogue, setOpenDialogue] = useState(false);
+  const [showSignin, setShowSignin] = useState(true);
   const dropdownRef = useRef(null);
 
-  const handleClick = () => setIsOpen(!isOpen);
-
-  // Close dropdown when clicking outside
+  // Close Explore dropdown when clicking outside
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
+        setExploreOpen(false);
       }
     };
     document.addEventListener("mousedown", handleOutsideClick);
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
-  const [showSignin, setShowSignin]=useState(true)
-
+  // Check if user is signed in
   useEffect(() => {
     const user = localStorage.getItem("user");
-    if (user) {
-      setShowSignin(false);
-    }
-  });
+    if (user) setShowSignin(false);
+  }, []);
 
-  const OnSearch =() => {
-    toast('You have been successfully Signed-in') 
-    return;}
+  const OnSearch = () => {
+    toast("You have been successfully Signed-in");
+  };
 
-  const signIn=()=>{
-    setOpenDialogue(true);
-  }
+  const signIn = () => setOpenDialogue(true);
 
-  const signOut=()=>{
-    localStorage.removeItem("user")
-    setShowSignin(true)
-    toast('You have been successfully Signed-out')
-    navigate('/')
-  }
+  const signOut = () => {
+    localStorage.removeItem("user");
+    setShowSignin(true);
+    toast("You have been successfully Signed-out");
+    navigate("/");
+  };
 
   return (
-    <div>
-      <nav className="fixed top-0 shadow-xl rounded-lg backdrop-blur-md shadow-black/30 w-[85%] left-[7vw] mt-2 md:w-[85%] md:left-27 md:mt-3 z-300">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between -mb-2">
-          <Link
-            to="/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-            <img src="./img/US1.png" className="h-30 md:ml-10 md:mt-1" alt="Flowbite Logo" />
-            {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span> */}
-          </Link>
-          <button
-            data-collapse-toggle="navbar-dropdown"
-            type="button"
-            className="inline-flex items-center mr-2 w-10 h-10 justify-center text-sm text-black rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-dropdown"
-            aria-expanded="false"
-          >
-            <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-5 h-5 mb-3"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 17 14"
+    <nav className="fixed top-0 w-[85%] left-[7vw] mt-2 md:mt-3 md:w-[85%] rounded-lg backdrop-blur-md shadow-[0_4px_30px_-1px_rgba(0,0,0,0.3)] z-50">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between -mb-2">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img
+            src="./img/US1.png"
+            className="h-30 md:ml-10 md:mt-1"
+            alt="UniStays Logo"
+          />
+        </Link>
+
+        {/* Hamburger button */}
+        <button
+          type="button"
+          className="inline-flex items-center md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 mr-4"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          <span className="sr-only">Open main menu</span>
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 17 14">
+            <path
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M1 1h15M1 7h15M1 13h15"
+            />
+          </svg>
+        </button>
+
+        {/* Menu */}
+        <div
+          className={`${
+            mobileOpen ? "block" : "hidden"
+          } w-full md:flex md:w-auto md:items-center mr-8`}
+        >
+          <ul className="flex flex-col md:flex-row md:space-x-8 font-medium p-4 md:p-0 mt-4 md:mt-0">
+            {/* Explore Dropdown */}
+            <li className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setExploreOpen(!exploreOpen)}
+                className="block py-2 px-3 text-black rounded-sm hover:text-teal-600 md:bg-transparent md:p-0"
               >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 1h15M1 7h15M1 13h15"
-                />
-              </svg>
-          </button>
-          <div
-            className="hidden w-full mb-2 md:block md:w-auto"
-            id="navbar-dropdown"
-          >
-            <ul className="flex flex-col font-medium p-4 md:p-10 mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 w-full">
-              <li className="relative" ref={dropdownRef}>
-                <button
-                  onClick={handleClick}
-                  className="block py-2 px-3 text-black rounded-sm md:bg-transparent hover:text-[#0D9488] md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
-                  aria-current="page"
-                >
-                  Explore Residences
-                </button>
+                Explore Residences
+              </button>
+              {exploreOpen && (
+                <div className="absolute top-10 left-0 z-50 bg-white shadow-lg rounded-md p-4">
+                  <Explore city={cities} setLoading={setLoading} />
+                </div>
+              )}
+            </li>
 
-                {isOpen && (
-                  <div className="absolute top-0 right-4 md:top-10 md:-right-50 z-50">
-                    <Explore 
-                      city={cities} 
-                      setLoading={setLoading}
-                    />
-                  </div>
-                )}
-              </li>
+            {/* About */}
+            <li>
+              <Link
+                to="/about"
+                className="block py-2 px-3 text-black rounded-sm hover:text-teal-600 md:bg-transparent md:p-0"
+              >
+                About Us
+              </Link>
+            </li>
+
+            {/* Sign In / Sign Out */}
+            {showSignin ? (
               <li>
-                  <ul
-                    className="text-md"
-                  >
-                    <li>
-                      <Link
-                        to="/about"
-                        className="block px-3 text-black rounded-sm md:bg-transparent hover:text-[#0D9488] md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
-                      >
-                        About Us
-                      </Link>
-                    </li>
-                  </ul>
-                  </li>
-
-              {showSignin ? (
-                <li className="relative">
                 <button
                   onClick={signIn}
-                  className="block py-2 px-3 text-black rounded-sm md:bg-transparent hover:text-[#0D9488] md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
-                  aria-current="page"
+                  className="block py-2 px-3 text-black rounded-sm hover:text-teal-600 md:bg-transparent md:p-0"
                 >
                   Sign In
                 </button>
               </li>
-              ): (
-                <li className="relative">
+            ) : (
+              <li>
                 <button
                   onClick={signOut}
-                  className="block hover:text-red-700 py-2 px-3 text-black rounded-sm md:bg-transparent md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
-                  aria-current="page"
+                  className="block py-2 px-3 text-black rounded-sm hover:text-red-700 md:bg-transparent md:p-0"
                 >
                   Sign Out
                 </button>
               </li>
             )}
-            </ul>
-          </div>
-            <Signin
-              open={openDialogue}
-              onClose={() => setOpenDialogue(false)}
-              onLoginSuccess={() => {
-                setShowSignin(false);
-                OnSearch();
-              }}
-            />
+          </ul>
         </div>
-      </nav>
-    </div>
+
+        {/* Signin Dialog */}
+        <Signin
+          open={openDialogue}
+          onClose={() => setOpenDialogue(false)}
+          onLoginSuccess={() => {
+            setShowSignin(false);
+            OnSearch();
+          }}
+        />
+      </div>
+    </nav>
   );
 };
 
