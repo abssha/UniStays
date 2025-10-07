@@ -7,6 +7,14 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 
+@font-face {
+  font-family: 'Dubai';
+  src: url('./assets/fonts/Dubai-Medium.ttf') format('truetype');
+  font-weight: 400; /* adjust according to font style */
+  font-style: normal;
+}
+
+
 *{
     font-family:'Dubai';
 }
