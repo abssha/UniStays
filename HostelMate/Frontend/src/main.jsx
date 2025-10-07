@@ -5,6 +5,8 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from './components/ui/sonner'
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import 'flowbite';
+
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>

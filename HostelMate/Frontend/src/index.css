@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "flowbite/src/themes/default";
+@import 'flowbite/dist/flowbite.min.css';
+
 /* @import "tw-animate-css"; */
 
 @custom-variant dark (&:is(.dark *));
