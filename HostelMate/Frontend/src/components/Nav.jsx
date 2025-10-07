@@ -57,7 +57,7 @@ const Nav = ({setLoading}) => {
 
   return (
     <div>
-      <nav className="fixed top-0 nav w-[85%] left-[7vw] mt-2 md:w-[85%] md:left-27 md:mt-3 z-300">
+      <nav className="fixed top-0 shadow-xl rounded-lg backdrop-blur-md shadow-black/30 w-[85%] left-[7vw] mt-2 md:w-[85%] md:left-27 md:mt-3 z-300">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between -mb-2">
           <Link
             to="/"
