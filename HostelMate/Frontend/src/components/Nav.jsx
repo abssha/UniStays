@@ -56,7 +56,7 @@ const Nav = ({ setLoading }) => {
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
             src="./img/US1.png"
-            className="h-30 md:ml-10 md:mt-1"
+            className="h-30 md:ml-10 ml-5 md:mt-1"
             alt="UniStays Logo"
           />
         </Link>
