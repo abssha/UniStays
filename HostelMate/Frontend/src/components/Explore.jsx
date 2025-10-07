@@ -58,13 +58,13 @@ const Explore = ({ city, setLoading }) => {
 }
 
   return (
-    <div className="flex w-full h-200 m-10">
-      {openExplore && (<div className="flex flex-col md:w-200 md:h-75 h-100 w-full shadow-sm bg-gray-50 rounded-lg shadow-black">
+    <div className="flex md:w-full md:h-200">
+      {openExplore && (<div className="flex flex-col md:w-200 md:h-75 h-[45vh] w-full shadow-sm bg-gray-50 rounded-lg shadow-black">
         {/* Search Box */}
-        <div className="flex items-center mt-3">
-          <div className="w-full relative p-4 m-5 md:mx-10 rounded-lg bg-white shadow-sm shadow-gray-300 flex flex-col md:flex md:justify-between">
+        <div className="flex items-center mt-1 md:mt-2">
+          <div className="w-full relative md:p-5 p-5 m-2 md:mx-10 rounded-lg bg-white shadow-sm shadow-gray-500 flex flex-col md:flex md:justify-between">
             <div className="flex flex-col md:w-[80%] w-full">
-              <h1 className="text-medium text-lg">Find in and around...</h1>
+              <h1 className="text-medium md:text-lg text-md">Find in and around...</h1>
               <GooglePlacesAutocomplete
                 placeholder="Search Location"
                 apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
@@ -79,7 +79,7 @@ const Explore = ({ city, setLoading }) => {
             </div>
             <button
               onClick={OnSearch}
-              className="bg-[#60C3AD] md:absolute md:right-2 md:top-3 md:w-[15%] text-white p-3 mt-3 rounded-lg hover:bg-teal-600 duration-300"
+              className="bg-[#60C3AD] md:absolute md:right-2 md:top-3 md:w-[15%] text-white md:p-3  p-2 mt-3 rounded-lg hover:bg-teal-600 duration-300"
             >
               Search
             </button>
@@ -87,18 +87,20 @@ const Explore = ({ city, setLoading }) => {
         </div>
 
         {/* Popular Cities */}
-        <h1 className="ml-5 font-semibold text-lg">🏢 Popular Cities ...</h1>
-        <div className="flex w-full justify-center md:gap-7 md:-mt-5">
+        <h1 className="ml-5 font-semibold md:text-lg text-md md:mt-0 mt-2">
+          🏢 Popular Cities ...
+        </h1>
+        <div className="flex w-full justify-center md:gap-7 md:-mt-5 -mt-6">
           {city.map((src, index) => (
             <Link key={index}>
               <div className="flex p-5 rounded-2xl hover:scale-105 hover:bg-teal-100 duration-300 cursor-pointer">
                 <figure>
                   <img
-                    className="md:h-18 h-17 object-contain"
+                    className="md:h-20 h-15 object-contain"
                     src={src}
                     alt={city_names[index]}
                   />
-                  <figcaption className="text-center text-medium">
+                  <figcaption className="text-center md:text-medium text-sm">
                     {city_names[index]}
                   </figcaption>
                 </figure>

@@ -95,7 +95,7 @@ const Nav = ({ setLoading }) => {
                 Explore Residences
               </button>
               {exploreOpen && (
-                <div className="absolute top-10 left-0 z-50 bg-white shadow-lg rounded-md p-4">
+                <div className="absolute md:top-10 md:-left-140 -left-9 w-[95vw] h-[45vh] z-50 rounded-md md:p-4 p-2">
                   <Explore city={cities} setLoading={setLoading} />
                 </div>
               )}
